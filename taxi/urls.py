@@ -15,7 +15,8 @@ from .views import (
     ManufacturerDeleteView,
     DriverCreateView,
     DriverDeleteView,
-    DriverLicenseUpdateView, DriverUpdateView, AssignDriverView, RemoveDriverView,
+    DriverLicenseUpdateView, DriverUpdateView,
+    AssignDriverView, RemoveDriverView,
 )
 
 urlpatterns = [
@@ -47,14 +48,21 @@ urlpatterns = [
     path("cars/<int:pk>/delete/", CarDeleteView.as_view(), name="car-delete"),
     path("drivers/", DriverListView.as_view(), name="driver-list"),
     path(
-        "drivers/<int:pk>/", DriverDetailView.as_view(), name="driver-detail"
+        "drivers/<int:pk>/",
+        DriverDetailView.as_view(), name="driver-detail"
     ),
-    path("drivers/create/", DriverCreateView.as_view(), name="driver-create"),
-    path("drivers/<int:pk>/delete/", DriverDeleteView.as_view(), name="driver-delete"),
-    path("drivers/<int:pk>/update/", DriverUpdateView.as_view(), name="driver-update"),
-    path("drivers/<int:pk>/update_license/", DriverLicenseUpdateView.as_view(), name="driver-license-update"),
-    path('cars/<int:pk>/assign_driver/', AssignDriverView.as_view(), name='assign_driver'),
-    path('cars/<int:pk>/remove_driver/', RemoveDriverView.as_view(), name='remove_driver'),
+    path("drivers/create/", DriverCreateView.as_view(),
+         name="driver-create"),
+    path("drivers/<int:pk>/delete/",
+         DriverDeleteView.as_view(), name="driver-delete"),
+    path("drivers/<int:pk>/update/", DriverUpdateView.as_view(),
+         name="driver-update"),
+    path("drivers/<int:pk>/update_license/",
+         DriverLicenseUpdateView.as_view(), name="driver-license-update"),
+    path("cars/<int:pk>/assign_driver/",
+         AssignDriverView.as_view(), name="assign_driver"),
+    path("cars/<int:pk>/remove_driver/",
+         RemoveDriverView.as_view(), name="remove_driver"),
 ]
 
 app_name = "taxi"

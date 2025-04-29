@@ -61,6 +61,13 @@ class CarListView(LoginRequiredMixin, generic.ListView):
 
 class CarDetailView(LoginRequiredMixin, generic.DetailView):
     model = Car
+    queryset = Car.objects.prefetch_related("drivers__user")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        car = self.object
+        context["is_driver_assigned"] = car.drivers.filter(id=self.request.user.id).exists()
+        return context
 
 
 class CarCreateView(LoginRequiredMixin, generic.CreateView):
@@ -110,7 +117,8 @@ class DriverDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class DriverLicenseUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Driver
-    fields = ["license"]
+    form_class = DriverLicenseUpdateForm
+    fields = ["license_number"]
     template_name = "taxi/update_license.html"
     success_url = reverse_lazy("taxi:driver-list")
 

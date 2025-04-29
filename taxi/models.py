@@ -15,9 +15,10 @@ class Manufacturer(models.Model):
         return f"{self.name} {self.country}"
 
 
-def validate_license_number(value):
-    if (len(value) != 8 or not value[:3].isalpha() or not value[:3].isupper()
-            or not value[3:].isdigit()):
+def validate_license_number(license_number: str) -> bool:
+    if (len(license_number) != 8 or not license_number[:3].isalpha()
+            or license_number[:3] != license_number[:3].upper()
+            or not license_number[-5:].isdigit()):
         raise ValidationError("Invalid license number")
 
 
