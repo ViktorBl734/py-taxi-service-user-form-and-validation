@@ -118,7 +118,6 @@ class DriverDeleteView(LoginRequiredMixin, generic.DeleteView):
 class DriverLicenseUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Driver
     form_class = DriverLicenseUpdateForm
-    fields = ["license_number"]
     template_name = "taxi/update_license.html"
     success_url = reverse_lazy("taxi:driver-list")
 
